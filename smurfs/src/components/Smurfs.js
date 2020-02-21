@@ -5,10 +5,10 @@ import { getData } from '../actions';
 
 
 const Smurfs = props => {
+    const getSmurfs = props.getData
     useEffect(() => {
-        props.getData();
-    }, []);
-    //console.log('smurfList in Smurf component', props.smurfList)
+        getSmurfs()
+    }, [getSmurfs])
     if (props.isFetchingData === true) {
         return <p>Please be patient while the smurfs load...</p>
     }
