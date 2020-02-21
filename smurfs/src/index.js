@@ -4,8 +4,15 @@ import "./index.css";
 import App from "./components/App";
 import { SmurfContext } from "./contexts/SmurfContext";
 import axios from 'axios';
+import { smurfReducer } from './reducers/smurfReducer';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 
+
+
+const store = createStore(smurfReducer, applyMiddleware(thunk));
 export const FETCH_DATA = "FETCH_DATA";
 export const POST_DATA = "POST_DATA";
 export const UPDATE_SMURFS = "UPDATE_SMURFS"
@@ -61,4 +68,4 @@ export const submitNewSmurf = (e) => dispatch => {
     dispatch({ type: ADD_NEW_SMURF, payload: e.target.value });
     dispatch({ type: UPDATE_NEW_SMURF_ID, payload: Date.now() });
 } */ 
-ReactDOM.render(<SmurfContext.Provider><App /></SmurfContext.Provider>, document.getElementById("root")); 
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById("root"));
